@@ -1,42 +1,48 @@
-name: ZBrush 2022.0.5
-game_slug: zbrush_2022-0-5
-version: 2022.0.5
-slug: zbrush_installer_2022-0-5
-runner: wine
-
-script:
-  game:
-    exe: "$GAMEDIR/drive_c/Program Files/Pixologic/ZBrush 2022/ZBrush.exe"
-    arch: win64
-    prefix: "$GAMEDIR"
-
-  files:
-    - setup_exe: "N/A: Select setup executable (ZBrush_2022.0.5_Installer.exe)."
-
-  installer:
-    - task:
-        description: Creating wineprefix...
-        name: create_prefix
-        arch: win64
-    - task:
-        description: Installing Visual C++ 2008 Runtime Libraries
-        name: winetricks
-        app: vcrun2008
-    - task:
-        description: Installing Visual C++ 2010 Runtime Libraries
-        name: winetricks
-        app: vcrun2010
-    - task:
-        description: Installing Visual C++ 2017 Runtime Libraries
-        name: winetricks
-        app: vcrun2017
-    - task:
-        description: Installing the main program...
-        name: wineexec
-        executable: setup_exe
-
-  wine:
-    arch: win64
-    version: lutris-6.21-6-x86_64
-    dxvk: true
-    esync: true
+name: ZBrush 2026                                                                                                           
+  game_slug: zbrush_2026
+  version: "2026"                                                                                                             
+  slug: zbrush_installer_2026
+  runner: wine
+                                                                                                                              
+  script:
+    game:                                                                                                                     
+      # Pixologic was acquired by Maxon — install path changed starting ~2023
+      exe: "$GAMEDIR/drive_c/Program Files/Maxon/ZBrush 2026/ZBrush.exe"                                                      
+      arch: win64                                                                                                             
+      prefix: "$GAMEDIR"                                                                                                      
+                                                                                                                              
+    files:        
+      - setup_exe: "N/A: Select setup executable (ZBrush_2026_Installer.exe)."                                                
+                                                                                                                              
+    installer:
+      - task:                                                                                                                 
+          description: Creating wineprefix...                                                                                 
+          name: create_prefix
+          arch: win64                                                                                                         
+      - task:     
+          description: Installing Visual C++ 2008 Runtime Libraries                                                           
+          name: winetricks                                                                                                    
+          app: vcrun2008
+      - task:                                                                                                                 
+          description: Installing Visual C++ 2010 Runtime Libraries
+          name: winetricks                                                                                                    
+          app: vcrun2010
+      - task:                                                                                                                 
+          description: Installing Visual C++ 2017 Runtime Libraries
+          name: winetricks
+          app: vcrun2017
+      - task:
+          description: Installing Visual C++ 2019 Runtime Libraries                                                           
+          name: winetricks
+          app: vcrun2019                                                                                                      
+      - task:     
+          description: Installing the main program...
+          name: wineexec                                                                                                      
+          executable: setup_exe
+                                                                                                                              
+    wine:         
+      arch: win64
+      version: lutris-GE-Proton9-27-x86_64   # or latest lutris-GE available
+      dxvk: true                                                                                                              
+      esync: true
+      fsync: true   # add fsync for better performance on CachyOS kernels    
